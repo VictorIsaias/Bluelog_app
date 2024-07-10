@@ -1,0 +1,16 @@
+@forward '@nebular/theme/styles/theming';
+@use '@nebular/theme/styles/theming' as *;
+@use '@nebular/theme/styles/themes/dark';
+
+$nb-themes: nb-register-theme((
+    layout-background-color: transparent,
+    header-background-color: background-basic-color-3,
+    footer-background-color: background-basic-color-3,
+    layout-padding:0rem,
+    header-shadow: 0 0.5rem 1rem rgba(17, 25, 48, 0.5),
+    header-height: 3rem,
+    toastr-icon-danger-color: #f4e4e4,
+    datepicker-background-color: background-basic-color-3,
+    select-filled-basic-focus-background-color:background-basic-color-3,
+    select-min-width:3rem
+), dark, dark);

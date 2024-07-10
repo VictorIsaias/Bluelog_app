@@ -1,0 +1,12 @@
+<nb-card>
+    <nb-card-header>Tablero de Juego</nb-card-header>
+    <nb-card-body>
+      <div class="board">
+        <div *ngFor="let cell of board; let i = index" class="cell" (click)="cellClicked(i)">
+          {{ cell }}
+        </div>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  
+  

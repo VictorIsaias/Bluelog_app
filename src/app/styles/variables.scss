@@ -1,0 +1,58 @@
+@use "../../themes" as *;
+
+$main-page-color: rgba(61, 78, 203, 0.85);
+$background-Input: nb-theme(background-basic-color-2);
+$background-Input-2: nb-theme(background-basic-color-3);
+
+@mixin fondo() {
+    width: 100%;
+    height: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.icon{
+    position: relative;
+    z-index: 1;
+  
+}
+
+::ng-deep nb-layout-column {
+  height: 80vw;
+}
+
+.back{
+  background: nb-theme(background-basic-color-3);
+}
+
+.icon-bk{
+    position: relative;
+    display: inline-block;
+
+}
+
+.blinking-light {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 87%;
+    background-color: #6060b71c;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    animation: blink 9s infinite;
+    filter: blur(10px); 
+  }
+  
+  @keyframes blink {
+    0%, 100% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+  }

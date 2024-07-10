@@ -1,0 +1,73 @@
+@import '../../styles/variables';
+
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+  
+.header img {
+    width: 9rem;
+    height: 9rem;
+    margin-bottom: 0.3rem;  
+}
+
+.header {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.fondo-layout{
+    @include fondo();
+}
+
+.text-danger{
+    text-shadow: 0 0 5px rgba(255, 61, 113,0.9)
+}
+
+
+.form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: fit-content;
+    margin-top: 2.3rem;
+    padding: 1rem;
+    padding-top: 0;
+    border: 1px solid #32323269;
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .input{
+    width: 100%;
+    height: fit-content;
+    margin-top: 0.6rem;
+    font-size: small;
+    display:flex;
+    flex-direction: column;
+
+  }
+
+  nb-form-field{
+    width: fit-content;
+  }
+  nb-form-field input{
+    
+    width: 32vw;
+    max-width: 15rem;
+    min-width: 10rem;
+  }
+
+
+.button{
+    margin-top: 0.5rem;
+    width: 100%;
+}

@@ -1,0 +1,50 @@
+<nb-layout class="fondo-layout">
+    <nb-layout-column >
+    <nb-card class="form-container" >
+      <nb-card-header>
+        <div class="header">
+          VERIFICACION DE CUENTA
+        </div>
+   </nb-card-header>
+     <nb-card-body>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+      
+        <div class="form-group input">
+          <label for="email">Correo electronico</label>
+          <nb-form-field>
+            <input nbInput fullWidth #emailInput (keypress)="onKeyPress($event, codeInput)" id="email" fieldSize="small" type="email" formControlName="email" >
+          </nb-form-field>
+          <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+            Debe ser un correo válido.
+          </div>
+         </div>
+
+        <div class="form-group input">
+          
+        <label for="code">Codigo</label>
+        <nb-form-field>  
+          <input nbInput #codeInput (keypress)="onKeyPress($event)" (input)="onInput($event)" fullWidth fieldSize="small" id="input" type="text"  formControlName="code" >
+        </nb-form-field> 
+        <div *ngIf="form.get('limitedInput')?.invalid && form.get('limitedInput')?.touched" class="text-danger">
+          Debe ser un número válido.
+        </div>
+        </div>
+  
+
+  
+      <div class="form-group input">
+  
+      <button nbButton hero [disabled]="form.invalid" class="button" status="primary" type="submit" >Enviar</button>
+      </div>
+    </form>
+     </nb-card-body>
+        <nb-card-footer>
+            <a nbButton size="small" ghost fullWidth (click)="sendAgain()" target="_blank">Enviar de nuevo</a>
+        </nb-card-footer>
+          
+    </nb-card>
+    
+  
+    </nb-layout-column>
+  </nb-layout>
+  

@@ -1,0 +1,86 @@
+<nb-layout class="fondo-layout">
+  <nb-layout-column >
+  <nb-card class="form-container" >
+    <nb-card-header>
+      <div class="header">
+        <div class="icon-bk">
+          <img class="icon" src="assets/images/bluelog_logo_2.svg" alt="Logo">
+          
+          <div class="blinking-light"></div>
+        </div>
+        NUEVO USUARIO
+      </div>
+ </nb-card-header>
+   <nb-card-body>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+    
+      <div class="form-group input">
+        
+      <label for="nickname">Nombre de usuario</label>
+      <nb-form-field>  
+        <input nbInput #nicknameInput (keypress)="onKeyPress($event, emailInput)" fullWidth fieldSize="small" id="nickname" type="text" formControlName="nickname" >
+      </nb-form-field> 
+      <div *ngIf="form.get('nickname')?.invalid && form.get('nickname')?.touched" class="text-danger">
+          El nombre debe tener al menos 2 caracteres.
+        </div>
+      </div>
+
+      <div class="form-group input">
+        <label for="email">Correo electronico</label>
+        <nb-form-field>
+          <input nbInput fullWidth #emailInput (keypress)="onKeyPress($event, passwordInput)" id="email" fieldSize="small" type="email" formControlName="email" >
+        </nb-form-field>
+        <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+          Debe ser un correo válido.
+        </div>
+       </div>
+
+    <div class="form-group input">
+      <label for="password">Contraseña</label>
+      <nb-form-field>
+        <input nbInput #passwordInput (keypress)="onKeyPress($event, confirmPasswordInput)"  [type]="getInputType()" fullWidth id="password" fieldSize="small" type="password" formControlName="password" [type]="hide ? 'password' : 'text'">
+        <button nbSuffix  nbButton ghost (click)="toggleShowPassword()">
+          <nb-icon [icon]="showPassword ? 'eye-off-2-outline':'eye-outline'"
+                   pack="eva"
+                   [attr.aria-label]="showPassword ?  'show password':'hide password'">
+          </nb-icon>
+        </button>
+      </nb-form-field>
+      <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-danger">
+        La contraseña debe tener al menos 6 caracteres.
+      </div>
+    </div>
+
+    
+    <div  class="form-group input">
+      <label for="confirmPassword">Confirma tu contraseña</label>
+      <nb-form-field>
+        <input nbInput [type]="getInputType()"  #confirmPasswordInput (keypress)="onKeyPress($event)" fullWidth id="confirmPassword" fieldSize="small" type="password" formControlName="confirmPassword" [type]="hide ? 'password' : 'text'">
+        <button nbSuffix nbButton ghost (click)="toggleShowPassword()">
+          <nb-icon [icon]="showPassword ? 'eye-off-2-outline':'eye-outline' "
+                   pack="eva"
+                   [attr.aria-label]="showPassword ?  'show password':'hide password'">
+          </nb-icon>
+        </button>
+      </nb-form-field>
+
+      <div *ngIf="form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched" class="text-danger caption-2 bold">
+        Las contraseñas deben coincidir.
+      </div>
+    </div>
+
+    <div class="form-group input">
+
+    <button nbButton hero [disabled]="form.invalid" class="button" status="primary" type="submit" >Enviar</button>
+    </div>
+  </form>
+   </nb-card-body>
+      <nb-card-footer>
+          <a nbButton size="small" ghost fullWidth (click)="redirect()" target="_blank">Ya tengo una cuenta</a>
+        </nb-card-footer>
+        
+  </nb-card>
+  
+
+  </nb-layout-column>
+</nb-layout>

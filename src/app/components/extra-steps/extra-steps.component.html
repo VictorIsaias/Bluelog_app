@@ -1,0 +1,111 @@
+<nb-layout class="fondo-layout">
+    <nb-layout-column >
+    <nb-card class="form-container" >
+      <nb-card-header>
+        <div class="header">
+                  
+          PASOS EXTRAS
+        </div>
+   </nb-card-header>
+     <nb-card-body>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <div class="group">
+            <div class=" input ">
+                <label for="nickname">Nombre/s</label>
+                <nb-form-field class="item">  
+                    <input  nbInput #nameInput (keypress)="onKeyPress($event, lastnameInput)"  fieldSize="small" id="name" type="text" formControlName="name" >
+                </nb-form-field> 
+                <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="text-danger">
+                    El nombre debe tener al menos 2 caracteres.
+                </div>
+            </div>
+    
+            <div class=" input " style="margin-left: 1rem;">
+                <label for="lastname">Apellido/s</label>
+                <nb-form-field class="item">  
+                    <input  nbInput #lastnameInput (keypress)="onKeyPress($event, phoneInput)"  fieldSize="small" id="lastname" type="text" formControlName="lastname" >
+                </nb-form-field> 
+                <div *ngIf="form.get('lastname')?.invalid && form.get('lastname')?.touched" class="text-danger">
+                    El apellido debe tener al menos 2 caracteres.
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group input">
+            <label for="phone">Telefono</label>
+            <div class="phones">
+                <nb-form-field class="phone_code">
+                    <nb-select placeholder="+0" #codeInput [(selected)]="selectedPhone"  size="small" id="country" formControlName="phone_code" >
+
+                        <nb-option class="back" value="{{code.substring(6)}}" *ngFor="let code of codes; let i = index">{{code}}</nb-option>
+
+                    </nb-select>
+                </nb-form-field>
+                <nb-form-field >  
+                    <input nbInput #phoneInput fullWidth (keypress)="onKeyPress($event, birthdateInput)"  fieldSize="small" id="phone" type="text" formControlName="phone" >
+                </nb-form-field> 
+            </div>
+
+            <div *ngIf="form.get('phone')?.invalid && form.get('phone')?.touched" class="text-danger">
+                Formato de telefono incorrecto
+            </div>
+        </div>
+
+        <div class="group">
+
+            <div class="form-group input">
+                <label for="birthdate">Fecha de nacimiento</label>
+                <nb-form-field class="item">  
+                    <input nbInput [nbDatepicker]="picker" #birthdateInput fieldSize="small" id="birthdate" type="text" formControlName="birthdate" >
+                    <nb-datepicker #picker [min]="min" [max]="max"></nb-datepicker>
+                </nb-form-field> 
+            </div>
+    
+            <div class="form-group input" style="margin-left: 1rem;">
+                <label for="country">Pais de residencia</label>
+                <nb-form-field class="item">  
+                    <nb-select #countryInput [(selected)]="selectedCountry"  size="small" id="country" formControlName="country" >
+                        <nb-option class="back" value="{{country.name}}" *ngFor="let country of countries; let i = index">{{country.name}}</nb-option>
+                    </nb-select>
+                </nb-form-field> 
+            </div>
+        </div>
+        <div class="form-group input">
+            <label for="photo">Foto de perfil</label>
+            <nb-card class="card">
+                
+                <nb-card-header >
+                    
+                    <nb-user size="giant" color='#151a30'
+                    name="{{form.value.name.split(' ')[0]}} {{form.value.lastname.split(' ')[0]}}"
+                    title="Engineer"
+                    [picture]="form.value.photo"
+                    onlyPicture>
+                    </nb-user>
+                </nb-card-header>
+                <nb-card-body>
+                    <input nbInput class='back' accept=".jpg,.jpeg,.png" fullWidth (change)="onFileSelected($event)" hidden  fieldSize="small" id="photo" type="file" >
+                    <button nbButton type="button"  status="basic" size="small" (click)="triggerFileInput()">Seleccionar archivo</button>
+                </nb-card-body>
+            </nb-card>
+        </div>
+  
+      <div class="form-group input">
+  
+        <button nbButton hero [disabled]="form.invalid" class="button" status="primary" type="submit" >Enviar</button>
+      </div>
+    </form>
+     </nb-card-body>
+        <nb-card-footer>
+            <a nbButton size="small" ghost fullWidth (click)="redirect()" target="_blank">Omitir</a>
+          </nb-card-footer>
+          
+    </nb-card>
+
+    
+    
+  
+    </nb-layout-column>
+  </nb-layout>
