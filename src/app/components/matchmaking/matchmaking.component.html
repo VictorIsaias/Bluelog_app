@@ -1,1 +1,24 @@
-<p>matchmaking works!</p>
+<nb-card *ngIf="!isRequesting">
+  <nb-card-header>Unirse a una partida</nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="form" (ngSubmit)="request()">
+      <input nbInput placeholder="Código de sala" formControlName="roomCode">
+    </form>
+  </nb-card-body>
+  <nb-card-footer class="footer">
+    <button nbButton status="primary" [disabled]="form.invalid" (click)="request()">Unirse</button>
+    <button nbButton status="danger" (click)="close()">Cancelar</button>
+  </nb-card-footer>
+</nb-card>
+
+
+<nb-card *ngIf="isRequesting">
+  <nb-card-header>Esperando respuesta...
+    <div class="countdown">{{ countdown }}</div></nb-card-header>
+  <nb-card-body >
+    <nb-spinner message=" "></nb-spinner>
+  </nb-card-body>
+  <nb-card-footer style="display: flex; justify-content: center; width: 100%;">
+    <button nbButton status="danger" (click)="cancelRequest()">Cancelar</button>
+  </nb-card-footer>
+</nb-card>

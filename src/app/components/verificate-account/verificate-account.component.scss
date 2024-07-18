@@ -21,6 +21,10 @@
     margin-bottom: 0.3rem;
 }
 
+.fondo-layout nb-layout-column {
+  height: fit-content;
+}
+
 .fondo-layout{
     @include fondo();
 }

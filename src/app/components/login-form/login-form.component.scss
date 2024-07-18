@@ -25,6 +25,10 @@
     @include fondo();
 }
 
+.fondo-layout nb-layout-column {
+  height: fit-content;
+}
+
 .text-danger{
     text-shadow: 0 0 5px rgba(255, 61, 113,0.9)
 }
@@ -39,8 +43,8 @@
     margin-top: 2.3rem;
     padding: 1rem;
     padding-top: 0;
-    border: 1px solid #32323269;
     border-radius: 1rem;
+    border: 1px solid #32323269;
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);

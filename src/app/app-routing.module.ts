@@ -7,23 +7,19 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { VerificateAccountComponent } from './components/verificate-account/verificate-account.component';
 import { ExtraStepsComponent } from './components/extra-steps/extra-steps.component';
 import { MeetingsComponent } from './components/meetings/meetings.component';
-import { GamesComponent } from './components/games/games.component';
 import { TiktaktoeComponent } from './components/tiktaktoe/tiktaktoe.component';
-import { MatchmakingComponent } from './components/matchmaking/matchmaking.component';
+import { GamesComponent } from './components/games/games.component';
 
 const routes: Routes = [
-
   {path:"auth", component:AuthComponent,canActivate:[],children:[
     {path:"signup", component:RegisterFormComponent,canActivate:[]},
     {path:"login", component:LoginFormComponent,canActivate:[]},
     {path:"verify-account", component:VerificateAccountComponent,canActivate:[]},
     {path:"extra-steps", component:ExtraStepsComponent,canActivate:[AuthGuard]},
   ]},
-  {path:"meet", component:MeetingsComponent,canActivate:[],children:[
+  {path:"meet", component:MeetingsComponent,canActivate:[AuthGuard],children:[
     {path:"games", component:GamesComponent,canActivate:[],children:[
-      {path:"tiktaktoe", component:TiktaktoeComponent,canActivate:[],children:[
-
-      ]},
+      {path:"tiktaktoe", component:TiktaktoeComponent,canActivate:[],children:[]},
     ]},
   ]},
 ];

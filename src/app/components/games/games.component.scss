@@ -1,0 +1,157 @@
+
+@use "../../../themes" as *;
+@import '../../styles/variables';
+
+
+.button-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  font-size: 0.9rem;
+}
+
+.button-list img{
+  margin-right: 3rem;
+}
+
+.game-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.item-list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.image-list{
+  min-width: 5rem;
+  max-width: 10rem;
+
+}
+
+.list-container nb-layout-column{
+  height: fit-content;
+  width:100%;
+}
+
+
+.list-container{
+  display: block;
+  height: 100vh;
+  
+  padding: 2rem;
+  margin: 2rem 2rem 4rem 1rem;
+  background-color:#19203890 ;
+  padding-top: 0;
+  border: 1px solid #32323269;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem 2rem 4rem 1rem;
+    background-color:#19203890 ;
+    padding-top: 0;
+    border: 1px solid #32323269;
+    border-radius: 0.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-matchmaking{
+    background:transparent ;
+    width: 100%;
+    
+
+}
+.header{
+    background:transparent ;
+    font-size: 1.3rem;
+    width: 100%;
+    height: fit-content;
+
+}
+
+.header div{
+    width:100%;
+}
+.header button{
+    
+    background:transparent ;
+}
+
+.container nb-layout-column{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+}
+
+
+.form-container {
+    display: flex;
+    justify-content:space-around;
+    width: 100%;
+    padding: 1rem;
+    padding-top: 0;
+    background-color:$background-Input-2;
+    border: 1px solid #32323269;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .button{
+    margin-bottom: 1rem;
+    max-width: 100vw;
+    min-width: 26vw;
+  }
+
+  .column{
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .game-description{
+    width: 100% ;
+    height: fit-content;
+    padding: 2rem;
+  }
+
+  .description,.rules{
+    margin: 1rem 0 2rem 2rem; 
+    font-size: 0.8rem;
+  }
+
+  .image{
+    max-width: 75%;
+
+  }
+
+  .text{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    align-items: start;
+    justify-content: start;
+    font-size: 1.1rem;
+  }
+
+  .matchmaking{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    margin: 0 2rem 2rem;
+    font-size: 1rem;
+  }
+

@@ -1,1 +1,74 @@
-<router-outlet></router-outlet>
+<router-outlet *ngIf="(listMode==false && descriptionMode==false)||gamesWindow==false"></router-outlet>
+
+<nb-layout class="list-container" *ngIf="listMode==true&&this.gamesWindow">
+    <nb-layout-header class="header">
+        <div>Juegos</div>
+    </nb-layout-header>
+    <nb-layout-column >
+        <nb-card >
+        
+            <nb-list>
+              <nb-list-item class="item-list" *ngFor="let thisGame of games; let i = index">
+
+                  <button nbButton ghost class="button-list" (click)="selectGame(i)">
+                    <img class="image-list" src="{{apiUrl}}/uploads/{{thisGame.image}}" />
+                    {{thisGame.name}}
+
+                  </button>
+                  <nb-actions>
+                    <nb-action (click)="viewStatistics(i)"  icon="bar-chart-outline"></nb-action>
+                    <nb-action nbContextMenuTag="menu" [nbContextMenu]="privacyOptions" nbContextMenuTrigger="click" (click)="setSelectedGame(thisGame)">
+                        <nb-icon icon="play-circle"></nb-icon>
+                    </nb-action>
+                  </nb-actions>
+
+              </nb-list-item>
+            </nb-list>
+        </nb-card>
+    </nb-layout-column>
+</nb-layout>
+
+
+<nb-layout class="container" *ngIf="descriptionMode==true&&this.gamesWindow">
+    <nb-layout-header class="header">
+        <div>{{game.name}}</div>
+        <button nbButton ghost (click)="quit()" status="basic"><nb-icon icon="close-outline"></nb-icon></button>
+    </nb-layout-header>
+    <nb-layout-column class="column"> 
+        <nb-layout class="game-description">
+            <nb-layout-column >
+                <img class="image" src="{{apiUrl}}/uploads/{{game.image}}" />
+            
+            </nb-layout-column>
+            <nb-layout-column class="text">
+                Descripción
+                <div class="description">{{game.description}}</div>
+                Reglas
+                <div class="rules">{{game.rules}}</div>
+
+            </nb-layout-column>
+        </nb-layout>
+        <nb-layout class="form-container">
+            <nb-layout-column  class="matchmaking">Matchmaking
+                <div style="margin-top: 1rem;">
+                    <button nbButton size="small" class="button"  shape="semi-round"  outline fullWidth  status="info" (click)="createGame()" >Crear partida</button>
+                </div>
+                <div>
+                    <button nbButton size="small" class="button" shape="semi-round"  outline fullWidth  (click)="joinGame('public')" status="info" >Unirse a partida publica</button>
+                </div>
+                <div>
+                    <button nbButton size="small" class="button" shape="semi-round"  outline fullWidth  (click)="joinGame('private')" status="info" >Unirse a partida privada</button>
+                </div>
+            </nb-layout-column>
+            <nb-layout-column  class="matchmaking">
+                Partida local
+                <div >
+                    <button nbButton size="small" class="button" style="margin-top: 2rem;" shape="semi-round"  outline fullWidth  status="info" (click)="createGame()" >2 jugadores</button>
+                </div>
+                <div>
+                    <button nbButton size="small" class="button" shape="semi-round"  outline fullWidth  (click)="joinGame()" status="info" >Contra la maquina</button>
+                </div>
+            </nb-layout-column>
+        </nb-layout>
+    </nb-layout-column>
+</nb-layout>

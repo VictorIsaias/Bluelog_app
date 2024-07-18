@@ -1,0 +1,62 @@
+.button-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    font-size: 0.9rem;
+  }
+  
+  .button-list img{
+    margin-right: 3rem;
+  }
+  
+  .game-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  
+  .user-star{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+  }
+
+  .item-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    width: 100%;
+  }
+  
+  .image-list{
+    min-width: 5rem;
+    max-width: 10rem;
+  
+  }
+  .header{
+    font-size: 1.1rem;
+    width: 100%;
+
+}
+  .footer{
+    
+    display: flex;
+    align-items: center;
+  }
+
+.header div,.footer div{
+
+  width:100%;
+}
+  .list-container{
+    display: block;
+    
+    border-right: 1px solid #32323269;
+    border-left: 1px solid #32323269;
+    border-radius: 0.5rem;
+  }
+  

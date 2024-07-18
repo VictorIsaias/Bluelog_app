@@ -55,6 +55,12 @@ export class ApiService {
   }
   get(ruta: String,token?:String): Observable<any> {
     const headers = this.getHeaders(token)
-    return this.http.get<any>(`${this.apiUrl}/${ruta}`, { headers });
+    return this.http.get<any>(`${this.apiUrl}/${ruta}`, { headers }).pipe(
+      tap(response => {
+      }),
+      catchError(error => {
+        return throwError(error); 
+      })
+    )
   }
 }

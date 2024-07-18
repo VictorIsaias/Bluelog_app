@@ -1,0 +1,43 @@
+
+<nb-layout class="list-container" >
+    <nb-layout-header class="header" *ngIf="status=='waiting-room'">
+        <div>Sala de espera</div>
+        <button nbButton (click)="BeginFunc.emit()" size="small" outline [disabled]="players!.length<2||myInfo.role!='host'" status="success" >Iniciar partida</button>
+
+    </nb-layout-header >
+    <nb-layout-column *ngIf="status=='waiting-room'" style="width:100%;height: fit-content;" >
+        <nb-card size="medium">
+        
+            <nb-list>
+              <nb-list-item class="item-list" *ngFor="let player of players; let i = index">
+                <div class="user-star">
+                  <nb-user
+                  name="{{player.nickname}}"
+                  picture="{{apiUrl}}/uploads/{{player.photo}}"
+                  title="Pais: {{player.country}}">
+                  </nb-user>
+                  <nb-icon
+                  style="margin-left: 1.3rem;"
+                  icon="star"
+                  status="basic"
+                  *ngIf="i==0"
+                  ></nb-icon>
+                </div>
+
+                  <nb-actions>
+                    <nb-action (click)="viewStatistics(i)"  icon="bar-chart-outline"></nb-action>
+                    <nb-action *ngIf="myInfo.role=='host'&&i!=0" (click)="deleteFunc.emit(i)">
+                        <nb-icon icon="person-delete"></nb-icon>
+                    </nb-action>
+                  </nb-actions>
+
+              </nb-list-item>
+            </nb-list>
+        </nb-card>
+    </nb-layout-column>
+    <nb-layout-footer *ngIf="status=='waiting-room'" class="footer">
+      <div>Codigo de la sala: {{gameInfo.room_code}}</div>
+      <button nbButton outline size="small">Invitar usuario</button>
+  </nb-layout-footer>
+</nb-layout>
+

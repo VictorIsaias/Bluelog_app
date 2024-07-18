@@ -104,7 +104,7 @@ export class ExtraStepsComponent implements OnInit {
   }
 
   redirect(){
-    this.router.navigate(['']);
+    this.router.navigate(['meet/games']);
   }
 
   update() {

@@ -12,19 +12,21 @@ import { RegisterFormComponent } from './components/register-form/register-form.
 import { RECAPTCHA_V3_SITE_KEY, RecaptchaV3Module } from 'ng-recaptcha';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthComponent } from './components/auth/auth.component';
-import { NbDatepickerModule, NbDialogModule, NbFormFieldModule, NbIconModule, NbSelectModule, NbThemeModule, NbTreeGridModule } from '@nebular/theme';
+import { NbActionsModule, NbButtonGroupModule, NbContextMenuModule, NbDatepickerModule, NbDialogModule, NbFormFieldModule, NbIconModule, NbListModule, NbSelectModule, NbSpinnerModule, NbThemeModule, NbTooltipModule, NbTreeGridModule, NbWindowModule } from '@nebular/theme';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { NbAlertModule, NbButtonModule, NbCardModule, NbChatModule, NbInputModule, NbLayoutModule, NbMenuModule, NbToastrModule, NbUserModule } from '@nebular/theme';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { VerificateAccountComponent } from './components/verificate-account/verificate-account.component';
 import { ExtraStepsComponent } from './components/extra-steps/extra-steps.component';
 import { AuthService } from './services/auth.service';
-import { GamesComponent } from './components/games/games.component';
 import { TiktaktoeComponent } from './components/tiktaktoe/tiktaktoe.component';
-import { MatchmakingComponent } from './components/matchmaking/matchmaking.component';
 import { MinichatComponent } from './components/minichat/minichat.component';
 import { MeetingsComponent } from './components/meetings/meetings.component';
 import { GamesService } from './services/games-alerts.service';
+import { MatchmakingComponent } from './components/matchmaking/matchmaking.component';
+import { WaitRoomComponent } from './components/wait-room/wait-room.component';
+import { GamesComponent } from './components/games/games.component';
+import { StatisticsComponent } from './components/statistics/statistics.component';
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: {
   transports:['websocket']
@@ -42,8 +44,11 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {
     TiktaktoeComponent,
     MatchmakingComponent,
     MinichatComponent,
-    MeetingsComponent
+    MeetingsComponent,
+    WaitRoomComponent,
+    StatisticsComponent,
   ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -59,6 +64,7 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {
     NbCardModule,
     NbInputModule,
     NbButtonModule,
+    NbDialogModule.forRoot(),
     NbToastrModule.forRoot(),
     NbMenuModule,
     NbChatModule,
@@ -70,9 +76,17 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {
     NbDatepickerModule.forRoot(),
     NbAlertModule,
     NbSelectModule,
+    NbSpinnerModule,
     NbUserModule,
-    NbDialogModule,
-    NbTreeGridModule
+    NbButtonGroupModule,
+    NbTreeGridModule,
+    NbListModule,
+    NbActionsModule,
+    NbContextMenuModule,
+    NbMenuModule.forRoot(),
+    NbWindowModule.forRoot(),
+
+    NbTooltipModule
   ],
   providers: [ApiService,GamesService,AuthService,CookieService,{ provide: RECAPTCHA_V3_SITE_KEY, useValue: environment.captchaKey }],
   bootstrap: [AppComponent]

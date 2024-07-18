@@ -44,7 +44,7 @@ export class LoginFormComponent{
   }
   
   redirectDashboard(){
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/meet/games']);
   }
   
   redirectExtra(){
@@ -65,7 +65,14 @@ export class LoginFormComponent{
         if(response.data.phone==null&&response.data.age==null&&response.data.photo==null&&response.data.country==null){
           this.redirectExtra()
         }else{
-          this.redirectDashboard()
+          let route = this.cookieService.get("route")
+          console.log(route)
+          if(route!=""){
+            this.router.navigate([route])
+            this.cookieService.delete("route")
+          }else{
+            this.redirectDashboard()
+          }
         }
       }
     },

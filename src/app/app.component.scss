@@ -1,7 +1,7 @@
 @use '../themes.scss' as *;
 .fondo {
     width: 100%;
-    height: 100%;
+    height: fit-content;
     margin: 0;
     background:linear-gradient(270deg, #010128,#01011e,#010131,#00000e,#01011e,#010128,#00000e);
     background-size: 800% 800%;

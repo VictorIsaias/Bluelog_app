@@ -1,12 +1,189 @@
-<nb-card>
-    <nb-card-header>Tablero de Juego</nb-card-header>
+<ng-template #disabledEsc let-data>
+  <div class="request-container">
+    Solicitud para unirse de {{data.join.nickname}}
+    <div class="buttons">
+      <button nbButton outline status="primary" (click)="acceptRequest(data.join)">Aceptar</button>
+      <button nbButton outline status="danger" (click)="closeRequest(data.join)">Rechazar</button>
+    </div>
+  </div>
+  
+</ng-template>
+
+<ng-template #beforeMatchDuel >
+  <nb-card>
+    <nb-card-header class="header-counter header-background">
+      <div *ngIf="match<=limitDuel">
+        <div >Siguiente ronda </div>
+        <div>{{this.match}} / {{limitDuel}}</div>
+      </div>
+      <div *ngIf="match>limitDuel">
+        <div >Rondas de desempate </div>
+        <div>{{this.match}}</div>
+      </div>
+      {{counter}}
+    </nb-card-header>
     <nb-card-body>
-      <div class="board">
-        <div *ngFor="let cell of board; let i = index" class="cell" (click)="cellClicked(i)">
-          {{ cell }}
-        </div>
+      <nb-list>
+        <nb-list-item class="item-list" *ngFor="let player of players; let i = index">
+          <div class="item-list-user">
+            <div class="player-x" *ngIf="player.user_code==playerX.user_code" >X</div>
+            <div class="player-o" *ngIf="player.user_code==playerO.user_code">O</div>
+            <nb-user
+            [ngClass]="{
+              'player-x': player.user_code==playerX.user_code,
+              'player-o': player.user_code==playerO.user_code
+            }"
+            name="{{player.nickname}}"
+            picture="{{apiUrl}}/uploads/{{player.photo}}">
+            </nb-user>
+          </div>
+          <div class="item-list-cell ">
+            Rondas ganadas: <div class="font-large">{{player.roundWins}}</div>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
+
+<ng-template #matchFinished>
+  <nb-card>
+    <nb-card-header class="header-background">
+      <div class="center font-large" *ngIf="winnerMatch=='Empate'">Empate</div>
+      <div class="center font-large player-o" *ngIf="winnerMatch=='O'"> {{playerO.nickname}} ganó esta ronda</div>
+      <div class="center font-large player-x" *ngIf="winnerMatch=='X'">  {{playerX.nickname}} ganó esta ronda</div>
+    </nb-card-header>
+    <nb-card-body class="center">
+
+      <div class="icon-bk">
+        <div class="blinking-light-winner"></div>
+        <nb-user
+        *ngIf="winnerMatch=='O'"
+        onlyPicture
+        size="giant"
+        shape="round"
+        picture="{{apiUrl}}/uploads/{{playerO.photo}}">
+        </nb-user>
+        <nb-user
+        *ngIf="winnerMatch=='X'"
+        onlyPicture
+        size="giant"
+        shape="round"
+        picture="{{apiUrl}}/uploads/{{playerX.photo}}">
+        </nb-user>
+        <nb-user
+        *ngIf="winnerMatch=='Empate'"
+        onlyPicture
+        size="giant"
+        shape="round"
+        picture="{{apiUrl}}/uploads/generic.png">
+        </nb-user>
+        
       </div>
     </nb-card-body>
   </nb-card>
+</ng-template>
+
+<ng-template #gameFinished>
+
+  <nb-card>
+    <nb-card-header class="header-counter header-background">
+      <div>
+        <div *ngIf="winner=='O'" class="player-o"> {{playerO.nickname}} ganó el juego! </div>
+        <div *ngIf="winner=='X'" class="player-x"> {{playerX.nickname}} ganó el juego! </div>
+      </div>
+
+      <div class="icon-bk">
+        <div class="blinking-light-winner"></div>
+        <nb-user
+        *ngIf="winner=='O'"
+        onlyPicture
+        size="giant"
+        shape="round"
+        picture="{{apiUrl}}/uploads/{{playerO.photo}}">
+        </nb-user>
+        <nb-user
+        *ngIf="winner=='X'"
+        onlyPicture
+        size="giant"
+        shape="round"
+        picture="{{apiUrl}}/uploads/{{playerX.photo}}">
+        </nb-user>
+      </div>
+    </nb-card-header>
+    <nb-card-body>
+      <nb-list>
+        <nb-list-item class="item-list" *ngFor="let player of players; let i = index">
+          <div>
+            <nb-user
+            name="{{player.nickname}}"
+            picture="{{apiUrl}}/uploads/{{player.photo}}">
+            </nb-user>
+          </div>
+          <div class="margin-right-3 width-50-25 row-space-between">
+
+            <div class="item-list-cell" style="margin-right: 1rem;">
+              Rondas ganadas: <div class="font-large">{{player.roundWins}}</div>
+            </div>
+            
+            <div class="item-list-cell ">
+              Rondas perdidas:  <div class="font-large">{{player.roundLooses}}</div>
+            </div>
+          </div>
+        </nb-list-item>
+      </nb-list>
+    </nb-card-body>
+  </nb-card>
+</ng-template>
+
+<ng-template #beforeMatchTournament>
+  <nb-card>
+    <nb-card-header></nb-card-header>
+  </nb-card>
+
+</ng-template>
+
+
+<nb-layout class="container" >
+  <nb-layout-column>
   
-  
+<nb-card class="card-container" *ngIf="status!='waiting-room'">
+  <nb-card-header class="header-board">
+    <nb-user
+    class="board-h player-x"
+    size="large"
+    shape="round"
+    name="X - {{playerX.nickname}}"
+    picture="{{apiUrl}}/uploads/{{playerX.photo}}">
+    </nb-user>
+    <div class="board-h" [ngClass]="{
+      'player-x': currentPlayer === 'X',
+      'player-o': currentPlayer === 'O'
+    }">
+      {{currentPlayer}}
+    </div>
+    <nb-user
+    class="board-h player-o"
+    size="large"
+    shape="round"
+    name="O - {{playerO.nickname}}"
+    picture="{{apiUrl}}/uploads/{{playerO.photo}}">
+    </nb-user>
+  </nb-card-header>
+  <nb-card-body class="card">
+    <div class="board">
+      <div *ngFor="let cell of board; let i = index" class="cell" (click)="cellClicked(i)" [ngClass]="{
+        'player-x': cell === 'X',
+        'player-o': cell === 'O'
+      }">
+        {{ cell }}
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>
+
+<app-wait-room (BeginFunc)="startGame()" (deleteFunc)="deletePlayer($event)" [gameInfo]="gameInfo" [myInfo]="myInfo" [players]="players" [status]="status"></app-wait-room>
+
+  </nb-layout-column>
+
+</nb-layout>
