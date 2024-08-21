@@ -31,6 +31,8 @@ export class Game {
       })
         this.myInfo.role=cookieService.get("role")
         this.myInfo.user_code=cookieService.get("user_code")
+        this.myInfo.photo=cookieService.get("photo")
+        this.myInfo.nickname=cookieService.get("nickname")
         this.token=cookieService.get("token")
         this.gameInfo.room_code=cookieService.get("room_code")
 
@@ -113,7 +115,10 @@ export class Game {
         matches?:Array<any>} = {}
     myInfo:{        
         role?:string,
-        user_code?:string} = {}
+        user_code?:string,
+        nickname?:string,
+        photo?:string|null
+    } = {}
 
     players:Array<any> = []
     messages:Array<message> = []

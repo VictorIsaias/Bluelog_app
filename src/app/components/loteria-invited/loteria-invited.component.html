@@ -1,0 +1,23 @@
+<nb-card>
+  <nb-card-header>Modo Invitado</nb-card-header>
+  <nb-card-body>
+    <div>
+      Carta actual:
+      <div *ngIf="currentCard">
+        <div>
+          <img   style="width: 6rem; height: 12rem;"  [src]="currentCard.image" />
+        </div>
+      </div>
+    </div>
+    
+    <div class="card-grid">
+      <div *ngFor="let card of myTable">
+        <button nbButton style="opacity: 0.7;" status="basic" [ngClass]="{ 'nb-is-marked': card.marked == true }" (click)="checkCard(card.name)">
+          <img style="width: 4rem; height: 8rem;" [src]="card.image" />
+        </button>
+      </div>
+    </div>
+    
+    <button [disabled]="!completedTable" nbButton status="primary" disabled (click)="completeGame()">Reclamar victoria</button>
+  </nb-card-body>
+</nb-card>

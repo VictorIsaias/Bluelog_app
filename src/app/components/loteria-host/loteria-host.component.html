@@ -1,0 +1,28 @@
+<nb-card>
+    <nb-card-header>Modo Host</nb-card-header>
+    <nb-card-body>
+      <div>
+        <div style="display: flex; justify-content: space-between; width: 100%;">
+
+          <div>
+            Cartas restantes: {{ availableCards.length }}
+              <img style="margin-left:1rem; width: 6rem; height: 10rem;" src="{{this.apiUrl}}/uploads/loteria_0_none.jpg" />  
+          </div>
+          <div>
+            <span *ngFor="let card of lastThreeCards" (click)="openCardDialog()">
+              <img style="width: 4rem; height: 8rem;" [src]="card.image" alt="{{ card.name }}" />
+              
+            </span>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+            Carta actual: 
+            <img style="width: 6rem; height: 12rem; margin: 3rem;" *ngIf="currentCard" [src]="currentCard.image" alt="{{ currentCard.name }}" />
+            {{currentCard?.number}} - {{ currentCard?.name }} 
+        </div>
+
+        <button nbButton status="primary" [disabled]="!canDraw" (click)="drawCard()">Sacar Carta</button>
+      </div>
+    </nb-card-body>
+  </nb-card>
+  

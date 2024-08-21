@@ -9,6 +9,9 @@ import { ExtraStepsComponent } from './components/extra-steps/extra-steps.compon
 import { MeetingsComponent } from './components/meetings/meetings.component';
 import { TiktaktoeComponent } from './components/tiktaktoe/tiktaktoe.component';
 import { GamesComponent } from './components/games/games.component';
+import { LoteriaComponent } from './components/loteria/loteria.component';
+import { GlobalHistoryComponent } from './components/global-history/global-history.component';
+import { UserHistoryComponent } from './components/user-history/user-history.component';
 
 const routes: Routes = [
   {path:"auth", component:AuthComponent,canActivate:[],children:[
@@ -19,7 +22,13 @@ const routes: Routes = [
   ]},
   {path:"meet", component:MeetingsComponent,canActivate:[AuthGuard],children:[
     {path:"games", component:GamesComponent,canActivate:[],children:[
-      {path:"tiktaktoe", component:TiktaktoeComponent,canActivate:[],children:[]},
+      {path:"tiktaktoe", component:TiktaktoeComponent,canActivate:[],children:[
+        {path:"history", component:GlobalHistoryComponent,canActivate:[],children:[]}
+      ]},
+      {path:"loteria", component:LoteriaComponent,canActivate:[],children:[
+        {path:"history", component:GlobalHistoryComponent,canActivate:[],children:[]},
+        {path:"user-history/:nickname", component:UserHistoryComponent,canActivate:[],children:[]}
+      ]}
     ]},
   ]},
 ];

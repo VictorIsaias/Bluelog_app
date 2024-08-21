@@ -27,6 +27,12 @@ import { MatchmakingComponent } from './components/matchmaking/matchmaking.compo
 import { WaitRoomComponent } from './components/wait-room/wait-room.component';
 import { GamesComponent } from './components/games/games.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { LoteriaComponent } from './components/loteria/loteria.component';
+import { LoteriaInvitedComponent } from './components/loteria-invited/loteria-invited.component';
+import { LoteriaHostComponent } from './components/loteria-host/loteria-host.component';
+import { CardsDialogComponent } from './components/cards-dialog/cards-dialog.component';
+import { GlobalHistoryComponent } from './components/global-history/global-history.component';
+import { UserHistoryComponent } from './components/user-history/user-history.component';
 
 const config: SocketIoConfig = { url: environment.apiUrl, options: {
   transports:['websocket']
@@ -47,6 +53,12 @@ const config: SocketIoConfig = { url: environment.apiUrl, options: {
     MeetingsComponent,
     WaitRoomComponent,
     StatisticsComponent,
+    LoteriaComponent,
+    LoteriaInvitedComponent,
+    LoteriaHostComponent,
+    CardsDialogComponent,
+    GlobalHistoryComponent,
+    UserHistoryComponent
   ],
 
   imports: [

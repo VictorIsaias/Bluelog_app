@@ -25,7 +25,7 @@
                 </div>
 
                   <nb-actions>
-                    <nb-action (click)="viewStatistics(i)"  icon="bar-chart-outline"></nb-action>
+                    <nb-action (click)="viewStatistics(player.nickname)"  icon="bar-chart-outline"></nb-action>
                     <nb-action *ngIf="myInfo.role=='host'&&i!=0" (click)="deleteFunc.emit(i)">
                         <nb-icon icon="person-delete"></nb-icon>
                     </nb-action>
@@ -37,7 +37,7 @@
     </nb-layout-column>
     <nb-layout-footer *ngIf="status=='waiting-room'" class="footer">
       <div>Codigo de la sala: {{gameInfo.room_code}}</div>
-      <button nbButton outline size="small">Invitar usuario</button>
+      <button nbButton outline size="small" (click)="viewStatisticsGlobal()">Ver estadisticas</button>
   </nb-layout-footer>
 </nb-layout>
 

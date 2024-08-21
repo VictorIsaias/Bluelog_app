@@ -1,0 +1,74 @@
+<ng-template #disabledEsc let-data>
+    <div class="request-container">
+      Solicitud para unirse de {{data.join.nickname}}
+      <div class="buttons">
+        <button nbButton outline status="primary" (click)="acceptRequest(data.join)">Aceptar</button>
+        <button nbButton outline status="danger" (click)="closeRequest(data.join)">Rechazar</button>
+      </div>
+    </div>
+    
+  </ng-template>
+  
+  <ng-template #beforeMatchDuel >
+    <nb-card>
+      <nb-card-header class="header-counter header-background">
+          <div >Empezando juego </div>
+
+        {{counter}}
+      </nb-card-header>
+      <nb-card-body>
+        <nb-list>
+          <nb-list-item class="item-list" *ngFor="let player of players; let i = index">
+            <div class="item-list-user">
+              <nb-user
+              name="{{player.nickname}}"
+              picture="{{apiUrl}}/uploads/{{player.photo}}">
+              </nb-user>
+            </div>
+          </nb-list-item>
+        </nb-list>
+      </nb-card-body>
+    </nb-card>
+  </ng-template>
+  
+  <ng-template #gameFinished>
+    <nb-card>
+      <nb-card-header class="header-background">
+        <div>Ganadores</div>
+      </nb-card-header>
+      <nb-card-body class="center">
+  
+        <nb-list>
+            <nb-list-item class="item-list" *ngFor="let player of winners; let i = index">
+              <div class="item-list-user">
+                <nb-user
+                name="{{player.nickname}}"
+                picture="{{apiUrl}}/uploads/{{player.photo}}">
+                </nb-user>
+              </div>
+            </nb-list-item>
+          </nb-list>
+          
+      </nb-card-body>
+    </nb-card>
+  </ng-template>
+  
+<div *ngIf="status!='waiting-room'">
+  <div *ngIf="this.myInfo.role == 'host'"> 
+      <app-loteria-host [winners]="winners" [currentCard]="currentCard" [gameInfo]="gameInfo" [myInfo]="myInfo" [players]="players" [status]="status" [myCards]="cards"></app-loteria-host>
+  </div>
+  <div *ngIf="this.myInfo.role == 'invited'">
+      <app-loteria-invited [winners]="winners" [currentCard]="currentCard" [gameInfo]="gameInfo" [myInfo]="myInfo" [players]="players" [status]="status" [myCards]="cards"></app-loteria-invited>
+  </div>
+
+</div>
+
+
+<nb-layout class="container" >
+  <nb-layout-column>
+
+<app-wait-room (BeginFunc)="startGame()" (deleteFunc)="deletePlayer($event)" [gameInfo]="gameInfo" [myInfo]="myInfo" [players]="players" [status]="status"></app-wait-room>
+
+  </nb-layout-column>
+
+</nb-layout>

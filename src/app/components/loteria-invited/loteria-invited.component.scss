@@ -1,0 +1,11 @@
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px; /* Ajusta el espacio entre las cartas */
+  }
+  
+  .nb-is-marked {
+    border: 8px solid rgb(208, 0, 255); 
+    opacity: 1;
+  }
+  

@@ -1,5 +1,10 @@
 import { Component,Input,Output,EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+import { NbDialogService } from '@nebular/theme';
 import { environment } from 'src/environments/environment';
+import { UserHistoryComponent } from '../user-history/user-history.component';
+import { GlobalHistoryComponent } from '../global-history/global-history.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-wait-room',
@@ -17,9 +22,18 @@ export class WaitRoomComponent {
 
   apiUrl = environment.apiUrl
 
+  constructor(private cookieService: CookieService,private router: Router,private dialogService: NbDialogService) { }
 
-  viewStatistics(userIndex: number) {
-    console.log('Ver estadísticas para:', userIndex)
+  viewStatistics(nickname: string) {
+    this.cookieService.set("history-user", nickname);
+    this.dialogService.open(UserHistoryComponent);
   }
+
+  viewStatisticsGlobal(){
+    
+    this.dialogService.open(GlobalHistoryComponent);
+
+  }
+  
 
 }

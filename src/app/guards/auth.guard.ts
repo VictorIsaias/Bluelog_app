@@ -25,6 +25,8 @@ export class AuthGuard implements CanActivate {
       this.auth.get("user", cookieValue).subscribe(
         response => {
           if (response.data.active) {
+            this.cookieService.set("nickname",response.data.nickname)
+            this.cookieService.set("photo",response.data.photo)
             resolve(true);
           } else {
             this.router.navigate(['/auth/login']);

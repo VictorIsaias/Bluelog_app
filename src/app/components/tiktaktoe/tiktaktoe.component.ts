@@ -37,9 +37,9 @@ export class TiktaktoeComponent extends Game implements OnInit{
 
   @ViewChild('beforeMatchDuel', { read: TemplateRef }) override beforeMatchTemplateDuel!: TemplateRef<HTMLElement>;  
 
-  @ViewChild('beforeMatchTournament', { read: TemplateRef }) override beforeMatchTemplateTournament!: TemplateRef<HTMLElement>;  
-
   @ViewChild('matchFinished', { read: TemplateRef }) override matchFinishedTemplate!: TemplateRef<HTMLElement>;  
+
+  @ViewChild('beforeMatchTournament', { read: TemplateRef }) override beforeMatchTemplateTournament!: TemplateRef<HTMLElement>;  
 
   @ViewChild('gameFinished', { read: TemplateRef }) override gameFinishedTemplate!: TemplateRef<HTMLElement>;  
 

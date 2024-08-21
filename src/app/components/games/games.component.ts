@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { MatchmakingComponent } from '../matchmaking/matchmaking.component';
 import { filter, map } from 'rxjs/operators';
 import { GamesService } from 'src/app/services/games-alerts.service';
+import { GlobalHistoryComponent } from '../global-history/global-history.component';
 
 interface gameInterface {
   name?:string,
@@ -134,11 +135,22 @@ export class GamesComponent implements OnInit{
         this.descriptionMode=false
         this.gamesWindow=false
         console.log(this)
-        this.router.navigate(['/meet/games/tiktaktoe'],{ 
-          queryParams: { 
-            room: response.data.room_code
-          } 
-        })
+        switch (this.game.id){
+          case 1:      
+            this.router.navigate(['/meet/games/tiktaktoe'],{ 
+              queryParams: { 
+                room: response.data.room_code
+              } 
+            })
+            break;
+          case 2:
+            this.router.navigate(['/meet/games/loteria'],{ 
+              queryParams: { 
+                room: response.data.room_code
+              } 
+            })
+            break;
+        }
       }
     },
     error =>{
@@ -187,17 +199,28 @@ export class GamesComponent implements OnInit{
           this.listMode=false
           this.descriptionMode=false
           this.gamesWindow=false
-          this.router.navigate(['/meet/games/tiktaktoe'],{ 
-            queryParams: { 
-              room: roomCode
-            } 
-          })
+          if(this.game.id==1){
+            this.router.navigate(['/meet/games/tiktaktoe'],{ 
+              queryParams: { 
+                room: roomCode
+              } 
+            })
+          }
+          else if(this.game.id==2){
+            this.router.navigate(['/meet/games/loteria'],{ 
+              queryParams: { 
+                room: roomCode
+              } 
+            })
+          }
         }
       })
   }
   
   viewStatistics(gameId: number) {
     console.log('Ver estadísticas para:', gameId)
+    this.dialogService.open(GlobalHistoryComponent);
+
   }
 
 
